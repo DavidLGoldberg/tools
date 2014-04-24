@@ -20,6 +20,6 @@ REPOS=(
 
 for path in ${REPOS[@]}; do
   pushd $path > /dev/null
-  git remote set-url origin git@github.com:Polymer/$path.git
+  git remote set-url origin git@${GITHUB_DOMAIN:-github.com}:Polymer/$path.git
   popd > /dev/null
 done

@@ -10,7 +10,7 @@ repo=$2
 
 # make folder (same as input, no checking!)
 mkdir $repo
-git clone git@github.com:$org/$repo.git --single-branch
+git clone git@${GITHUB_DOMAIN:-github.com}:$org/$repo.git --single-branch
 
 # switch to gh-pages branch
 pushd $repo >/dev/null
@@ -21,7 +21,15 @@ git rm -rf -q .
 
 # use bower to install runtime deployment
 bower cache clean $repo # ensure we're getting the latest from master.
-bower install --config.directory="components" $org/$repo#master
+
+protocol=""; protocol_ext="";
+if [ $GIT_PROTOCOL ]
+then
+    protocol="git://";
+    protocol_ext=".git";
+fi;
+
+bower install --config.directory="components" $protocol${GITHUB_DOMAIN:-github.com}/$org/$repo$protocol_ext#master
 
 # redirect by default to the component folder
 echo "<META http-equiv="refresh" content=\"0;URL=components/$repo/\">" >index.html

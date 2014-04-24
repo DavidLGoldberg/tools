@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ssh auth, easier to script
-POLYMER_PATH="git@github.com:Polymer"
+POLYMER_PATH="git@${GITHUB_DOMAIN:-github.com}:Polymer"
 REPOLIST=()
 
 # Only pull new versions with -p flag
@@ -157,7 +157,7 @@ gen_changelog() {
     RNAME=${REPO##*[/\\]}
 
     # Changelog format: - commit message ([commit](commit url on github))
-    PRETTY="- %s ([commit](https://github.com/Polymer/${RNAME}/commit/%h))"
+    PRETTY="- %s ([commit](https://${GITHUB_DOMAIN:-github.com}/Polymer/${RNAME}/commit/%h))"
     log "GEN CHANGELOG" "$REPO"
 
     # find slightly older tag, sorted semver style

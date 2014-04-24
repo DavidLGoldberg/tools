@@ -8,7 +8,7 @@ for repo in $REPOS; do
   name=${path##*[/\\]}
   pushd $path > /dev/null
   
-  git remote set-url origin git@github.com:polymer-elements/$name.git
+  git remote set-url origin git@${GITHUB_DOMAIN:-github.com}:polymer-elements/$name.git
 
   popd > /dev/null
 done

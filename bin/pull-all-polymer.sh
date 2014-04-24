@@ -17,9 +17,9 @@ ORG="Polymer"
 
 prepare() {
   if [ $SSH -eq 1 ]; then
-    POLYMER_PATH="git@github.com:$ORG"
+    POLYMER_PATH="git@${GITHUB_DOMAIN:-github.com}:$ORG"
   else
-    POLYMER_PATH="https://github.com/$ORG"
+    POLYMER_PATH="https://${GITHUB_DOMAIN:-github.com}/$ORG"
   fi
 
   # Short names for all the repos
@@ -52,7 +52,7 @@ prepare() {
 
   # Web Animations has its own org, hardcode full path
   REPOS+=("web-animations-js")
-  REPO_PATHS+=("https://github.com/web-animations/web-animations-js.git")
+  REPO_PATHS+=("https://${GITHUB_DOMAIN:-github.com}/web-animations/web-animations-js.git")
 }
 
 # repos that fail to clone will be put here

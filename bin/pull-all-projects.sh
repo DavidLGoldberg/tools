@@ -25,9 +25,9 @@ ok() {
 prepare() {
   # default to https auth
   if [ $SSH -eq 1 ]; then
-    GIT_PATH="git@github.com:$ORG"
+    GIT_PATH="git@${GITHUB_DOMAIN:-github.com}:$ORG"
   else
-    GIT_PATH="https://github.com/$ORG"
+    GIT_PATH="https://${GITHUB_DOMAIN:-github.com}/$ORG"
   fi
 
   REPOS=(
